@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Room Temperature System</string>
+    <string name="system_controller">System Controller</string>
+    <string name="button">Button</string>
+    <string name="fan">FAN</string>
+    <string name="off_on">OFF/ON</string>
+</resources>

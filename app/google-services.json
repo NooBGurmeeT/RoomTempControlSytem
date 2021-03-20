@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "625977501121",
+    "project_id": "roomtempsytem",
+    "storage_bucket": "roomtempsytem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625977501121:android:0f3c5380e69ecf439fbb40",
+        "android_client_info": {
+          "package_name": "com.example.roomtemperaturesystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625977501121-fqpkro65mmrt305n1bfha1gi34q0hdq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3wYzgSAFcfgWYIY63ai-80jQZthS2eOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625977501121-fqpkro65mmrt305n1bfha1gi34q0hdq2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
