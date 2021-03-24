@@ -2,6 +2,7 @@ package com.example.roomtemperaturesystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,6 +21,7 @@ public class Heating extends AppCompatActivity {
     EditText ReqheatTempetext;
     TextView Currheattemptview;
     Button heating_mode;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,9 @@ public class Heating extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        assert extras != null;
         final String value = extras.getString("CurrTempValue");
+        assert value != null;
         final double CurrTempValue =Double.parseDouble(value);
         Currheattemptview.setText(String.format(Locale.US,"%.2f",CurrTempValue)+" °C");
         //Currheattemptview.addTextChangedListener();

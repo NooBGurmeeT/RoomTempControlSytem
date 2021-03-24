@@ -2,9 +2,11 @@ package com.example.roomtemperaturesystem;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class Signup extends AppCompatActivity {
     TextInputEditText  textInputEditTextFullname,textInputEditTextUsername,textInputEditTextPassword,textInputEditTextEmail;
@@ -56,6 +60,7 @@ public class Signup extends AppCompatActivity {
                 if (!fullname.equals("") && !username.equals("") && !password.equals("") && !email.equals("")) {
                     progressBar.setVisibility(View.VISIBLE);
                     fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                            if(task.isSuccessful()){
@@ -65,7 +70,7 @@ public class Signup extends AppCompatActivity {
                            }
                            else
                            {
-                               Toast.makeText(getApplicationContext(),"Error! "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                               Toast.makeText(getApplicationContext(),"Error! "+ Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
                            }
                         }
                     });

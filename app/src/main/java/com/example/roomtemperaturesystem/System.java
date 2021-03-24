@@ -2,9 +2,11 @@ package com.example.roomtemperaturesystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,7 @@ public class System extends AppCompatActivity {
     Button ExecuteBtn;
     ImageView backcolor;
     TextView expTime;
+    MediaPlayer player;
 //    boolean checkfanswitch;
 //    int fanspeedvalue=0;
     SharedPreferences preferences;
@@ -41,6 +44,7 @@ public class System extends AppCompatActivity {
     String mSubject="Temperature alert";
     String mMessage = "";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,7 @@ public class System extends AppCompatActivity {
         ExecuteBtn=findViewById(R.id.button7);
         backcolor=findViewById(R.id.imageview1);
         expTime=findViewById(R.id.textView17);
+       player=MediaPlayer.create(getApplicationContext(),R.raw.military_alarm);
 
         preferences=getSharedPreferences("UserInfo",0);
 
@@ -197,6 +202,7 @@ public class System extends AppCompatActivity {
             ExecuteBtn.setVisibility(View.VISIBLE);
             ExecuteBtn.setText("EXECUTE COOLING");
             String value3=intent.getStringExtra("CurrCoolTempValue2");
+            assert value3 != null;
             CurrTempValue[0]=Double.parseDouble(value3);
             CurrTempsystem.setText( String.format(Locale.US,"%.2f",Double.parseDouble(value3))+" °C");
             expTime.setText(String.format(Locale.US,"%.2f",Math.abs(CurrTempValue[0]-ReqTempValue[0]))+" sec");
@@ -209,17 +215,28 @@ public class System extends AppCompatActivity {
             ExecuteBtn.setVisibility(View.VISIBLE);
             ExecuteBtn.setText("EXECUTE HEATING");
             String value3=intent.getStringExtra("CurrheatTempValue2");
+            assert value3 != null;
             CurrTempsystem.setText( String.format(Locale.US,"%.2f",Double.parseDouble(value3))+" °C");
             CurrTempValue[0]=Double.parseDouble(value3);
             check[0]=2;
             expTime.setText(String.format(Locale.US,"%.2f",Math.abs(CurrTempValue[0]-ReqTempValue[0]))+" sec");
         }
+
+
+
+
+
+
+
+
         if(CurrTempValue[0]<-50||CurrTempValue[0]>50)
         {
+            player.start();
             cool_mode.setEnabled(false);
             heat_mode.setEnabled(false);
             auto_mode.setEnabled(false);
             final int[] check1={0};
+            ReqTempsystem.setText("20.00 °C");
             if(CurrTempValue[0]<-50)
             {
                 mMessage="";
@@ -258,6 +275,7 @@ public class System extends AppCompatActivity {
 
                             runOnUiThread(new Runnable() {
 
+                                @SuppressLint("SetTextI18n")
                                 @Override
                                 public void run() {
                                     if(check1[0]==1)
@@ -366,6 +384,7 @@ public class System extends AppCompatActivity {
 
                             runOnUiThread(new Runnable() {
 
+                                @SuppressLint("SetTextI18n")
                                 @Override
                                 public void run() {
                                     if(check[0]==1)
@@ -461,9 +480,24 @@ public class System extends AppCompatActivity {
                t.start();
        }
        });
+
+
+
+
+
+
+
+
+
+
+
+
+
        auto_mode.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+
+               ReqTempsystem.setText("20.00 °C");
                if(CurrTempValue[0]<20||CurrTempValue[0]>20)
                {
                    final int[] check1={0};
@@ -508,6 +542,7 @@ public class System extends AppCompatActivity {
 
                                    runOnUiThread(new Runnable() {
 
+                                       @SuppressLint("SetTextI18n")
                                        @Override
                                        public void run() {
                                            if(check1[0]==1)
@@ -542,6 +577,7 @@ public class System extends AppCompatActivity {
                                                    //mMessage="The room temperature has been normalized, You can enter the room";
                                                    //sendAlertMail();
                                                    continueThread[0]=false;
+                                                   //finish();
                                                }
                                            }
                                            if(check1[0]==2)
@@ -575,6 +611,7 @@ public class System extends AppCompatActivity {
                                                    //mMessage="Required Temparature  has been achieved";
                                                    //sendAlertMail();
                                                    continueThread[0]=false;
+                                                   //finish();
                                                }
                                            }
 
